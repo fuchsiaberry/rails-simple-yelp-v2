@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_restaurant, only: %i[new create]
+  before_action :set_restaurant, only: %i[new create ]
 
   def new
     @review = Review.new
@@ -9,11 +9,17 @@ class ReviewsController < ApplicationController
     @review = Review.create(review_params)
 
     @review.restaurant = @restaurant
-     if @review.save
+    if @review.save
       redirect_to restaurants_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to restaurant_path(@review.restaurant), status: :see_other
   end
 
   private
