@@ -1,6 +1,11 @@
 <h1>Simple YELP</h1>
 
 <h2>Our Restaurants</h2>
+
+
 <% @restaurants.each do |restaurant| %>
-  <%= restaurant.name %>
+  <div>
+    <%= link_to restaurant.name, restaurant_path(restaurant) %> -
+    <%= restaurant.category.capitalize %>
+  </div>
 <% end %>
